@@ -4,7 +4,7 @@
 __author__ = 'will'
 
 from rc_car_interface import RC_Car_Interface
-from tf_learn import DNN_Driver
+from tf_learn import CNN_Driver
 import numpy as np
 import time
 import cv2
@@ -15,12 +15,12 @@ class SelfDriving:
 
     def __init__(self):
         self.rc_car_cntl = RC_Car_Interface()   # 인터페이스
-        self.dnn_driver = DNN_Driver()          # 신경망
+        self.cnn_driver = CNN_Driver()          # 신경망
         self.rc_car_cntl.set_left_speed(0)
         self.rc_car_cntl.set_right_speed(0)
         self.velocity = 0                       # 속도
         self.direction = 0                      # 방향
-        self.dnn_driver.tf_learn()              # 학습
+        self.cnn_driver.tf_learn()              # 학습
     
     def rc_car_control(self, direction):
         # calculate left and right wheel speed with direction
@@ -46,7 +46,7 @@ class SelfDriving:
             img = self.rc_car_cntl.get_image_from_camera()
             # img = np.reshape(img,img.shape[0]**2)
 
-            direction = self.dnn_driver.predict_direction(img)      # float (1보다 클 수 있음)
+            direction = self.cnn_driver.predict_direction(img)      # float (1보다 클 수 있음)
             # print(direction)
             self.rc_car_control(direction)
             if direction != 0: time.sleep(0.1)

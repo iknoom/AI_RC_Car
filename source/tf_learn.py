@@ -20,7 +20,7 @@ outputs = 1
 
 from get_image_data import *
 
-class DNN_Driver():
+class CNN_Driver():
     def __init__(self):
         self.trX = None
         self.trY = None
