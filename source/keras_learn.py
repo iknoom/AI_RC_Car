@@ -28,7 +28,7 @@ class CNN_Driver():
         self.teY = None
         self.model = None
 
-    def tf_learn(self):
+    def keras_learn(self):
         self.trX, self.trY = get_training_data()
         self.teX, self.teY = get_test_data()
 

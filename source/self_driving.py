@@ -4,7 +4,7 @@
 __author__ = 'will'
 
 from rc_car_interface import RC_Car_Interface
-from tf_learn import CNN_Driver
+from keras_learn import CNN_Driver
 import numpy as np
 import time
 import cv2
@@ -20,7 +20,7 @@ class SelfDriving:
         self.rc_car_cntl.set_right_speed(0)
         self.velocity = 0                       # 속도
         self.direction = 0                      # 방향
-        self.cnn_driver.tf_learn()              # 학습
+        self.cnn_driver.keras_learn()           # 학습
     
     def rc_car_control(self, direction):
         # calculate left and right wheel speed with direction
