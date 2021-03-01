@@ -36,11 +36,23 @@ Pi camera를 통해서 516장을 촬영한 후 직접 라벨링했습니다.
     - nb_epochs는 epoch의 수를 나타내며 최종 모델에서는 15로 설정했습니다.
 3. 사용하는 모델에 맞춰 channel의 차원을 추가합니다. (이미지가 흑백이므로 dim=1입니다.)
 4. 모델을 구축합니다. 최종 모델은 다음과 같은 구조입니다.
-    - optimizer로는 `adam`을 사용했습니다.
-    - loss function으로는 `categorical_crossentropy`을 사용했습니다.
+    - Conv2D(32, (3, 3), padding='same', activation='tanh')
+    - MaxPooling2D(pool_size=(2, 2))
+    - Dropout(0.25)
+    - Conv2D(64, (3, 3), padding='same', activation='tanh')
+    - MaxPooling2D(pool_size=(2, 2))
+    - Dropout(0.25)
+    - Flatten()
+    - Dense(1024, activation='relu')
+    - Dropout(0.5)
+    - Dense(nb_classes, activation='softmax')
+  
+
 
 - 참고사항
     - 이미지를 `16*16`으로 압축해서 model에 넣어야 합니다. Rpi 상에서 돌아야하는 model이어서 가볍게 만들었습니다.
+    - optimizer로는 `adam`을 사용했습니다.
+    - loss function으로는 `categorical_crossentropy`을 사용했습니다.
     - 최종 모델을 기준으로 test시에 95% 이상의 정확도를 보였습니다.
 
 
